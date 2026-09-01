@@ -67,3 +67,4 @@ t.test(df_ctrl$IE, df_fert$IE, paired = TRUE)
 
 boxplot(IE$IE)
 t.test(IE$IE, mu = 0.95)
+

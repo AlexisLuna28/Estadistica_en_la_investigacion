@@ -122,5 +122,5 @@ barplot(feeds[order(feeds, decreasing = TRUE)])
 
 barplot(feeds[order(feeds)], 
     col = "#ffdb4d", main = "Frecuencias por tipo de\n alimentacion",
-     xlab = "Número de pollos", las=1, horiz= TRUE)
+     xlab = "Número de pollos", las=1, horiz= TRUE, cex.names = 0.7, cex.axis =0.7 )
 

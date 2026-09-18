@@ -1,4 +1,9 @@
+# Nombre: Jorge Alexis Luna Robles
+# Matricula:  2134500
+# Fecha: 08/09/2026
+
 # Ejercicio 3.1
+
 # URL de los datos
 url <- paste0("https://raw.githubusercontent.com/mgtagle/",
               "Estadistica_Investigacion_2026/refs/heads/main/", 
@@ -6,61 +11,87 @@ url <- paste0("https://raw.githubusercontent.com/mgtagle/",
 
 # Importar los datos directamente desde GitHub
 cuadro1 <- read.csv(url, header = TRUE)
+
+# Revisar los datos
+head(cuadro1)
 str(cuadro1)
 
-#Histograma de la variable diametro
-hist(cuadro1$Diametro)
+# Formule la hipótesis nula (H0) y la hipótesis alternativa (H1).
 
-# Hipotesis nula: No existen diferencias en los diametros de los arboles
-# Hipotesis alternativa: Los arboles si presentan diametros diferentes
+# H0: No se presentan diferencias significativas en los diámetros medios
+# de los árboles de un rodal de bosque templado
+# H1: Se presentan diferencias significativas en los diámetros medios 
+# de los árboles de un rodal de bosque templado
+
+#Histograma de la variable diámetro
+hist(cuadro1$Diametro, main = "Histograma de la\n variable diámetro ",
+     xlab = "Diámetro",
+     ylab = "Frecuencia",
+     ylim = c(0,15),
+     xlim = c(5,25),
+     col = "yellow")
 
 # Prueba de normalidad
 shapiro.test(cuadro1$Diametro)
 
-# Media de la variable diametro
+# Media de la variable diámetro
 mean(cuadro1$Diametro)
 
-# Desviacion estandar de la variable diametro
+# Desviación estándar de la variable diámetro
 sd(cuadro1$Diametro)
 
-# Prueba de una sola muestra
+# Prueba de t
 
 boxplot(cuadro1$Diametro)
+t.test(cuadro1$Diametro, mu = 16.5, alternative = "two.sided")
 
-# Prueba de t de una sola muestra 
-t.test(cuadro1$Diametro, mu = 0.95)
-
-
-# 1.- Formule la hipotesis nula (H0) y la hipotesis alternativa (H1)
-# R= H0: No se presentan diferencias significativas en el diametro
-# de los arboles de bosque templado
-# R= H1: Se presenta diferencias significativas en el diámetro 
-# de los arboles de bosque templado
+#### Respuestas del ejercicio 3.1
+# 1.- Formule la hipótesis nula (H0) y la hipótesis alternativa (H1)
+# R= H0: No se presentan diferencias significativas en los diámetros medios
+# de los árboles de un rodal de bosque templado
+# R= H1: Se presentan diferencias significativas en los diámetros medios 
+# de los árboles de un rodal de bosque templado
   
-# 2.- La pregunta planteada requiere una prueba de una cola o de dos colas)-¿
-# R: Se requiere una prueba de dos colas, ya que solo se esta indicando que 
-# se requiere determinar si hay diferencias significativas en el diametro (16.5)
+# 2.- La pregunta planteada requiere una prueba de una cola o de dos colas?
+# R: Se requiere una prueba de dos colas, ya que solo se está indicando que 
+# se requiere determinar si hay diferencias significativas en el diámetro (16.5)
 # no especifica si es mayor o menor.
   
 # 3.- Calcule la media y la desviación estándar de la variable Diametro
+# R= Media: 15.794       Desviación estándar: 3.227017
 
-# 4.- Realizar la prueba de t: 
+# 4.- Realizar la prueba de t: se aplicó mediante la función de t.test
   
 # 5.- Identificar en los resultados lo siguiente:
-# Estadistico de t:  R= 32.526
+# Estadístico de t:  R= -1.547
 # Grados de Libertad: R= 49
-# Valor de p: R= <2.2e-16
+# Valor de p: R= 0.1283
 # Media de la muestra: R= 15.794
-# Intervalo de confianza del 95%: R= 14.97689 - 16.71111
+# Intervalo de confianza del 95%: R= 14.87689 - 16.71111
   
-# 6.- Con α =0,05, indique si se rechaza o no se rechaza H0. 
-# R= Se rechaza la hipotesis nula (H0) ya que si existen 
-# diferencias sifnigicativas en la variable diametro
+# 6.- Con α = 0,05, indique si se rechaza o no se rechaza H0. 
+# R= No se rechaza la hipótesis nula (H0) ya que no existen 
+# diferencias significativas en la variable diámetro
   
 # 7.- Redacte una conclusión en términos del diámetro medio de 
 # los árboles del rodal
-# R= 
+# R= De acuerdo con los resultados obtenidos en la prueba de t, el p-value 0.1283 
+# es mayor al nivel de significancia de α=0.05, por lo que no se rechaza 
+# la hipótesis nula. Si bien el diámetro medio de los árboles de la muestra 
+# fue de 15.794, es un valor que no difiere significativamente del diámetro 
+# medio de referencia de 16.5 establecido a partir de los registros históricos.
 
+# Preguntas de reflexión 
+# ¿El intervalo de confianza del 95% 
+# contiene el valor de referencia de 16.5 cm? 
+# R= Si, el valor de referencia de 16.5 se encuentra entre 
+# los intervalos de confianza 14.87689 - 16.71111
+
+# ¿Cómo se relaciona este resultado con la decisión 
+# obtenida mediante el valor de p?
+# R= Se relaciona mediante a la consistencia mutua de que si el valor de p
+# es mayor a 0.05, el valor de referencia debe estar dentro de los intervalos 
+# de confianza.
 
 #####
 
@@ -73,16 +104,28 @@ costal <- c(87.7, 80.01, 77.28, 78.76, 81.52, 74.2, 80.71, 79.5, 77.87,
             78.44, 79.01, 80.47, 76.23, 78.89, 77.14, 69.94, 78.54, 79.7,
             82.45, 77.29, 75.52, 77.21, 75.99, 81.94, 80.41, 77.7)
 
+# Histograma 
+hist(costal, main = "Histograma del peso\n de los costales ",
+     xlab = "Peso (kg)",
+     ylab = "Frecuencia",
+     ylim = c(0,15),
+     xlim = c(68,90),
+     col = "red")
+
+# Prueba de normalidad
+shapiro.test(costal)
+
 # Media del peso neto medio de los costales
 mean(costal)
 
-#Desviacion estandar del peso neto medio de los costales
+# Desviación estándar del peso neto medio de los costales
 sd(costal)
 
 # Prueba de t
+boxplot(costal)
 t.test(costal, mu= 80, alternative = "less")
 
-### Actividades
+### Respuestas ejercicio 3.2
 
 # 1.- Explique con sus propias palabras qué representan H0 y H1.
 # Ho: No hay diferencia significativa en el peso medio de los costales, 
@@ -92,28 +135,31 @@ t.test(costal, mu= 80, alternative = "less")
 # resultando menor a 80 kg.
 
 # 2.- ¿Por qué corresponde utilizar una prueba de una cola?  
-# R= Se utiliza una prueba de una cola, ya que se especifica que se quiere 
+# R= Se utiliza una prueba de una cola, ya que se especifica que se busca 
 # verificar que el peso neto medio de los costales es menor a 80 kg
 
 # 3.- Calcule la media y desviación estándar de los 44 costales.
-# media: R= 78.91068
-# desviacion estandar: R= 3.056023
+# R= Media: 78.91068    Desviación estándar: 3.056023
 
-# 4.- Realice la prueba: 
+# 4.- Realice la prueba: se aplicó mediante la funcion t.test
 
 # 5.- Identifique: 
-# estadístico t: R= -2.3644
-# grados de libertad: R= 43 
-# valor de p: R= 0.01132 
-# media observada: R= 78.91068
+# Estadístico t: R= -2.3644
+# Grados de libertad: R= 43 
+# Valor de p: R= 0.01132 
+# Media observada: R= 78.91068
 
 # 6.- Compare el valor de p con α = 0,05.
+# ¿Se rechaza o no se rechaza H0? R= Se rechaza la hipótesis nula, 
+# ya que el peso neto medio de los costales si es menor a 80 kg.
 
-# ¿Se rechaza o no se rechaza H0? R= Se rechaza la hipotesis nula, 
-# ya que el peso neto medio de los costales si es menor a 80 kg, 
-# de esta forma se acepta la hipotesis alternativa
-
-# 7.- Redacte una conclusión en el contexto del problema,indicando si existe 
+# 7.- Redacte una conclusión en el contexto del problema, indicando si existe 
 # evidencia estadística suficiente para afirmar que los costales contienen,
 # en promedio, menos de 80 kg.
+# R= Si existe evidencia estadística suficiente para afirmar que los costales 
+# contienen, en promedio menos de 80 kg. Dado que el p value (0.0113) indica 
+# rechazar la hipótesis nula en favor de la alternativa, demostrando que 
+# el peso medio neto real de los costales de 78.91 es significativamente 
+# menor al contenido declarado por la empresa de 80 kg, lo cual le da la razón 
+# al consumidor a su sospecha de que el contenido era menor.
 
